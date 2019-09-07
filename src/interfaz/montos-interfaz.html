@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="montos-interfaz">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+
+    </template>
+
+    <script>
+
+        class montoInterfaz extends Polymer.Element {
+
+            static get is() {
+                return 'montos-interfaz';
+            }
+
+            static get properties() {
+                return {
+                    
+                };
+            }
+
+            ready() {
+                super.ready();
+
+                Polymer.RenderStatus.afterNextRender(this, function() {
+                    
+                });
+            }
+
+        }
+
+        window.customElements.define(montoInterfaz.is, montoInterfaz);
+    </script>
+</dom-module>

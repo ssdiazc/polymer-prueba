@@ -1,0 +1,67 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="login-modelo">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <iron-ajax
+    auto
+    id="hacePeticion"
+    url="{{url}}"
+    handle-as="json"
+    method="POST"
+    body = "[[peticion]]"
+    content-type="application/json"
+    on-response="respuesta"
+    on-error = "errorReq"
+  ></iron-ajax>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class loginModelo extends Polymer.Element {
+      static get is() { return 'login-modelo'; }
+      static get properties() {
+        return {
+          peticion: Object
+        };
+      }
+
+      respuesta(e){
+          console.log(e.detail)
+          console.log("adsfdsafasd")
+          this.dispatchEvent(new CustomEvent('peticion', {
+              detail: {
+                  datos: e.detail.response,
+                  codigo: e.detail.status
+              }
+          }));
+      }
+
+      errorReq(e){
+          // console.log(e.detail.response)
+          console.log(e.detail.error)
+          this.dispatchEvent(new CustomEvent('peticion', {
+              detail: {
+                  datos: "",
+                  codigo: "403"
+              },
+              cargando: String
+          }));
+      }
+
+      _computeHeader(token){
+        return {Authorization: 'Bearer ' + token};
+      }
+    }
+
+    window.customElements.define(loginModelo.is, loginModelo);
+  </script>
+</dom-module>

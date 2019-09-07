@@ -1,0 +1,28 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="tarjeta-controlador">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>TarjetaControlador...</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class tarjetaControlador extends Polymer.Element {
+      static get is() { return 'tarjeta-controlador'; }
+      static get properties() {
+        return {
+        };
+      }
+    }
+
+    window.customElements.define(tarjetaControlador.is, tarjetaControlador);
+  </script>
+</dom-module>

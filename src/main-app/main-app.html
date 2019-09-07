@@ -1,0 +1,50 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<link rel="import" href="/src/interfaz/login-interfaz.html">
+<link rel="import" href="/src/interfaz/tarjeta-interfaz.html">
+<link rel="import" href="/src/interfaz/informacion-interfaz.html">
+<link rel="import" href="/src/interfaz/montos-interfaz.html">
+
+<dom-module id="main-appp">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .tarjeta{
+        background-color: blanchedalmond;
+      }
+    </style>
+    <template is="dom-if" if="{{!ocultar}}">
+        <login-interfaz
+            ocultar = "{{ocultar}}" 
+       ></login-interfaz>
+
+       <p>CEDULA_CIUDADANIA0031223355</p>
+       <p>88888888</p>
+
+    </template>
+    <template is="dom-if" if="{{ocultar}}">
+        <p>fdasadsf</p>
+        <div class="tarjeta"><tarjeta-interfaz></tarjeta-interfaz></div>
+        <div><infromacion-interfaz></infromacion-interfaz></div>
+        <div><montos-interfaz></montos-interfaz></div>
+    </template>
+  </template>
+
+  <script>
+    class MainAppp extends Polymer.Element {
+      static get is() { return 'main-appp'; }
+      static get properties() {
+        return {
+          ocultar: {
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+    }
+
+    window.customElements.define(MainAppp.is, MainAppp);
+  </script>
+</dom-module>

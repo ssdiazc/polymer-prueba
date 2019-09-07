@@ -1,0 +1,86 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../modelos/login-modelo.html">
+
+
+<dom-module id="login-controlador">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <template is="dom-if" if="{{aux}}">
+      <login-modelo
+        url = "[[url]]"
+        peticion = "[[datos]]"
+        on-peticion = "codigo"
+      ></login-modelo>
+    </template>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class loginControlador extends Polymer.Element {
+      static get is() { return 'login-controlador'; }
+      static get properties() {
+        return {
+          url: String,
+          user: String,
+          password: String,
+          ocultar: {
+            type: Boolean,
+            notify: true
+          },
+          aux: {
+            type: Boolean,
+            value: false,
+            notify: true
+          },
+          datos:{
+            type: Object,
+            computed: "obtieneReq(user,password)"
+        }
+        };
+      }
+
+      obtieneReq(user,pass){
+        return{
+                  "authentication": {
+                    "userID": user,
+                    "consumerID": "10000033",
+                    "authenticationType": "02",
+                    "authenticationData": [{
+                      "idAuthenticationData": "password",
+                      "authenticationData": [pass]
+                    }]
+                  },
+                  "backendUserRequest": {
+                    "userId": "",
+                    "accessCode": user,
+                    "dialogId": ""
+                  }
+                }
+      }
+
+      codigo(e){
+        // console.log(e.detail.datos);
+        console.log(e.detail.codigo);
+        if(e.detail.codigo != "200"){
+          this.aux = false;
+          this.ocultar = false;
+          alert("Ingrese una combinación de usuario y contraseña válida.")
+        }
+        else{
+          this.ocultar = true;
+        }
+      }
+    }
+
+    window.customElements.define(loginControlador.is, loginControlador);
+  </script>
+</dom-module>

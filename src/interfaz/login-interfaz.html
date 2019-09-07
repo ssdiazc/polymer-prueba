@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../controladores/login-controlador.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<dom-module id="login-interfaz">
+  <template>
+    <style>
+      :host {
+        display: block;
+        text-align: center;
+      }
+      .opciones{
+        text-align: left;
+        width: 20cm;
+      }
+      .imagen{
+        width: 500px;
+        height: 150px;
+      }
+    </style>
+    <img class="imagen" src="https://www.bbva.com.co/content/dam/public-web/colombia/new-beginning/bbva-en-colombia.png">
+    <div>
+      <p class="opciones"><paper-input label="Usuario: " id="user"></paper-input></p>
+      <p class="opciones"><paper-input label="Contraseña: " id="pass"></paper-input></p>
+    </div>
+    <template is="dom-if" if="{{login}}">
+    
+    </template>
+    <paper-button raised on-click="inicioSesion" id ="ingresar">Ingresar</paper-button>
+    <template is="dom-if" if="{{login}}">
+      <login-controlador
+        user= "[[usuario]]"
+        url = "[[url]]"
+        password = "[[contrasena]]"
+        aux = "{{login}}"
+        ocultar = "{{ocultar}}"
+      ></login-controlador>
+    </template>
+  </template>
+
+  <script>
+ 
+    class loginInterfaz extends Polymer.Element {
+      static get is() { return 'login-interfaz'; }
+      static get properties() {
+        return {
+          login: {
+            type:Boolean,
+            value: false,
+          },
+          ocultar: {
+            type:Boolean,
+            notify: true
+          },
+          url:{
+            type:String,
+            value: "https://artichoke.platform.bbva.com/TechArchitecture/co/grantingTicket/V02"
+          },
+          usuario: String,
+          contrasena: String
+        };
+      }
+
+      inicioSesion(){
+        this.usuario = this.shadowRoot.getElementById("user").value;
+        this.contrasena = this.shadowRoot.getElementById("pass").value;
+        this.login = true;
+      }
+    }
+
+    window.customElements.define(loginInterfaz.is, loginInterfaz);
+  </script>
+</dom-module>

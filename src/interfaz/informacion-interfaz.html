@@ -1,6 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
-<dom-module id="infromacion-interfaz">
+<dom-module id="informacion-interfaz">
     <template>
         <style>
             :host {
@@ -8,7 +8,7 @@
             }
         </style>
 
-
+        <P>Monto: [[monto]] , Tipo: [[codigo]]</P>
     </template>
 
     <script>
@@ -16,13 +16,25 @@
         class informacionInterfaz extends Polymer.Element {
 
             static get is() {
-                return 'infromacion-interfaz';
+                return 'informacion-interfaz';
             }
 
             static get properties() {
                 return {
+                    informacion:{
+                        type: Array,
+                        observer: "calculos"
+                    },
+                    monto:String,
+                    codigo:String,
+                    indice:String
                     
                 };
+            }
+
+            calculos(){
+                this.monto = this.informacion.monto;
+                this.codigo = this.informacion.indicador;
             }
 
             ready() {

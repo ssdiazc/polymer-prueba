@@ -1,14 +1,31 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
-
+<link rel="import" href="../interfaz/informacion-interfaz.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <dom-module id="montos-interfaz">
     <template>
         <style>
             :host {
-                display: block
+                display: block;
+                text-align: center;
+                padding-bottom: 10px;
             }
         </style>
-
-
+        <template is="dom-repeat" items="{{montos}}" as="montos">
+            <informacion-interfaz
+                informacion = "[[montos]]"
+                indice = "[[index]]"
+            ></informacion-interfaz>
+        </template>
+        <p>
+            <span>
+            <paper-input label="Ingrese monto: " type="number" min = "0" id="monto"></paper-input>
+            </span>
+            <span>
+            <paper-button raised on-click = "abonar">Abono</paper-button>
+            <paper-button raised on-click = "debitar">Debito</paper-button>
+            </span>
+        </p>
     </template>
 
     <script>
@@ -21,8 +38,44 @@
 
             static get properties() {
                 return {
+                    indicador:{
+                        type: String
+                    },
+                    montos:{
+                        type: Object,
+                        value:function(){
+                            return[]
+                        }
+                    }
                     
                 };
+            }
+
+            abonar(){
+                let monto = this.shadowRoot.getElementById("monto").value;
+                if(monto>0){
+                    this.actualizaMontos(monto,"Abono");
+                }
+                else{
+                    alert("Ingrese un monto mayor a cero")
+                }
+            }
+            debitar(){
+                let monto = this.shadowRoot.getElementById("monto").value;
+                if(monto>0){
+                    this.actualizaMontos(monto,"Debito");
+                }
+                else{
+                    alert("Ingrese un monto mayor a cero")
+                }
+            }
+
+            actualizaMontos(monto, indicador){
+                let obj = {
+                    monto: monto,
+                    indicador: indicador
+                }
+                this.push("montos",obj);
             }
 
             ready() {

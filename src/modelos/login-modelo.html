@@ -35,8 +35,6 @@
       }
 
       respuesta(e){
-          console.log(e.detail)
-          console.log("adsfdsafasd")
           this.dispatchEvent(new CustomEvent('peticion', {
               detail: {
                   datos: e.detail.response,
@@ -46,8 +44,6 @@
       }
 
       errorReq(e){
-          // console.log(e.detail.response)
-          console.log(e.detail.error)
           this.dispatchEvent(new CustomEvent('peticion', {
               detail: {
                   datos: "",

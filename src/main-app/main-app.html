@@ -9,13 +9,19 @@
     <style>
       :host {
         display: block;
+        text-align: center;
+      }
+      .interfaz{
+        padding-top: 100px;
       }
       .tarjeta{
         text-align: center;
+        padding-bottom: 20px;
       }
     </style>
     <template is="dom-if" if="{{!ocultar}}">
         <login-interfaz
+            class = "interfaz"
             ocultar = "{{ocultar}}" 
        ></login-interfaz>
 

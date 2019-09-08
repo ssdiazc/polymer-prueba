@@ -4,11 +4,11 @@
     <template>
         <style>
             :host {
-                display: block
+                display: block;
             }
         </style>
 
-        <P>Monto: [[monto]] , Tipo: [[codigo]]</P>
+        <P>[[valor]]</P>
     </template>
 
     <script>
@@ -21,20 +21,9 @@
 
             static get properties() {
                 return {
-                    informacion:{
-                        type: Array,
-                        observer: "calculos"
-                    },
-                    monto:String,
-                    codigo:String,
-                    indice:String
-                    
+                    valor:String,
+                    tipo:String
                 };
-            }
-
-            calculos(){
-                this.monto = this.informacion.monto;
-                this.codigo = this.informacion.indicador;
             }
 
             ready() {
